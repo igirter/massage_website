@@ -1,0 +1,31 @@
+:root {
+    --color-background: #F5F0EA;
+    --color-surface: #E8DDD2;
+
+    --color-primary: #8B6F5A;
+    --color-primary-dark: #6F5746;
+
+    --color-text: #332B26;
+    --color-text-light: #75685F;
+
+    --color-white: #FFFFFF;
+
+    --font-main: system-ui, 'Segoe UI', Roboto, sans-serif;
+
+    font-family: var(--font-main);
+    color: var(--color-text);
+    background-color: var(--color-background);
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
