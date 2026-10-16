@@ -1,4 +1,5 @@
-import { useState } from 'react'
+
+import { useEffect, useState } from 'react'
 import './Experience.css'
 
 const experiences = [
@@ -24,7 +25,64 @@ export function Experience() {
     const [touchStart, setTouchStart] = useState(null)
     const [touchStartY, setTouchStartY] = useState(null)
 
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentIndex((prevIndex) =>
+                (prevIndex + 1) % experiences.length
+            )
+        }, 4000)
+
+        return () => clearInterval(timer)
+    }, [])
+
     const currentExperience = experiences[currentIndex]
+
+    const showPrevious = () => {
+        setCurrentIndex(
+            (prevIndex) =>
+                (prevIndex - 1 + experiences.length) % experiences.length
+        )
+    }
+
+    const showNext = () => {
+        setCurrentIndex(
+            (prevIndex) => (prevIndex + 1) % experiences.length
+        )
+    }
+
+    const handleTouchStart = (event) => {
+        setTouchStart(event.touches[0].clientX)
+        setTouchStartY(event.touches[0].clientY)
+    }
+
+    const handleTouchEnd = (event) => {
+        if (touchStart === null || touchStartY === null) {
+            return
+        }
+
+        const touchEnd = event.changedTouches[0].clientX
+        const touchEndY = event.changedTouches[0].clientY
+
+        const distance = touchStart - touchEnd
+        const distanceY = touchStartY - touchEndY
+
+        setTouchStart(null)
+        setTouchStartY(null)
+
+        if (Math.abs(distanceY) > Math.abs(distance)) {
+            return
+        }
+
+        if (Math.abs(distance) < 50) {
+            return
+        }
+
+        if (distance > 0) {
+            showNext()
+        } else {
+            showPrevious()
+        }
+    }
 
     return (
         <section className="experience">
@@ -39,47 +97,16 @@ export function Experience() {
 
                 <div
                     className="experience__content"
-                    onTouchStart={(event) => {
-                        setTouchStart(event.touches[0].clientX)
-                        setTouchStartY(event.touches[0].clientY)
-                    }}
-                    onTouchEnd={(event) => {
-                        const touchEnd = event.changedTouches[0].clientX
-                        const touchEndY = event.changedTouches[0].clientY
-
-                        const distance = touchStart - touchEnd
-                        const distanceY = touchStartY - touchEndY
-
-                        if (Math.abs(distanceY) > Math.abs(distance)) {
-                            setTouchStart(null)
-                            setTouchStartY(null)
-                            return
-                        }
-
-                        if (Math.abs(distance) < 50) {
-                            setTouchStart(null)
-                            setTouchStartY(null)
-                            return
-                        }
-
-                        if (distance > 0) {
-                            setCurrentIndex(
-                                (currentIndex + 1) % experiences.length
-                            )
-                        } else {
-                            setCurrentIndex(
-                                (currentIndex - 1 + experiences.length) %
-                                    experiences.length
-                            )
-                        }
-
-                        setTouchStart(null)
-                        setTouchStartY(null)
-                    }}
+                    onTouchStart={handleTouchStart}
+                    onTouchEnd={handleTouchEnd}
                 >
-                    <h3>{currentExperience.title}</h3>
-
-                    <p>{currentExperience.description}</p>
+                    <div
+                        key={currentIndex}
+                        className="experience__slide"
+                    >
+                        <h3>{currentExperience.title}</h3>
+                        <p>{currentExperience.description}</p>
+                    </div>
 
                     <div className="experience__dots">
                         {experiences.map((_, index) => (
@@ -96,12 +123,7 @@ export function Experience() {
 
                     <div className="experience__controls">
                         <button
-                            onClick={() => {
-                                setCurrentIndex(
-                                    (currentIndex - 1 + experiences.length) %
-                                        experiences.length
-                                )
-                            }}
+                            onClick={showPrevious}
                             aria-label="Предыдущий опыт"
                         >
                             <svg
@@ -119,11 +141,7 @@ export function Experience() {
                         </button>
 
                         <button
-                            onClick={() => {
-                                setCurrentIndex(
-                                    (currentIndex + 1) % experiences.length
-                                )
-                            }}
+                            onClick={showNext}
                             aria-label="Следующий опыт"
                         >
                             <svg

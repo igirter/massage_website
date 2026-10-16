@@ -1,0 +1,46 @@
+{
+  "url": "https://massage-website-omega.vercel.app/",
+  "checkedAt": "2026-10-14T10:19:17.698Z",
+  "results": [
+    {
+      "screen": "mobile-375",
+      "status": 200,
+      "pageTitle": "massage_website",
+      "viewportWidth": 375,
+      "pageWidth": 375,
+      "pageHeight": 5276,
+      "horizontalOverflow": false,
+      "errors": []
+    },
+    {
+      "screen": "mobile-390",
+      "status": 200,
+      "pageTitle": "massage_website",
+      "viewportWidth": 390,
+      "pageWidth": 390,
+      "pageHeight": 5191,
+      "horizontalOverflow": false,
+      "errors": []
+    },
+    {
+      "screen": "tablet-768",
+      "status": 200,
+      "pageTitle": "massage_website",
+      "viewportWidth": 768,
+      "pageWidth": 768,
+      "pageHeight": 4859,
+      "horizontalOverflow": false,
+      "errors": []
+    },
+    {
+      "screen": "desktop-1440",
+      "status": 200,
+      "pageTitle": "massage_website",
+      "viewportWidth": 1440,
+      "pageWidth": 1440,
+      "pageHeight": 4042,
+      "horizontalOverflow": false,
+      "errors": []
+    }
+  ]
+}

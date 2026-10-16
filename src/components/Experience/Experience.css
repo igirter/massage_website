@@ -171,4 +171,36 @@
     .experience__controls {
         display: none;
     }
+
+    .experience h2 {
+        text-align: center;
+    }
+
+    .experience {
+        text-align: center;
+    }
+
+}
+
+
+.experience__slide {
+    animation: experienceSlideIn 0.5s ease both;
+}
+
+@keyframes experienceSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .experience__slide {
+        animation: none;
+    }
 }

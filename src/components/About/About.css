@@ -76,4 +76,8 @@
     .about__text h2 {
         font-size: 36px;
     }
+
+    .about {
+     text-align: center;
+    }
 }
